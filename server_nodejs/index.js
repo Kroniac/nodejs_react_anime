@@ -1,4 +1,6 @@
 const express = require('express');
+const feedRoutes = require('./routes/feed');
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -7,8 +9,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send({ value: "I'm Farid" });
-});
+app.use('/feed', feedRoutes);
 
 app.listen(5000);
