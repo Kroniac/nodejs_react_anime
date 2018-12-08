@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Scenes } from './config/import_paths'
 import axios from 'axios';
 import './App.css';
 
+const Feeds = Scenes.Feeds();
+
 class App extends Component {
-  state = {
-    fetchedValue: '',
-  }
-  componentDidMount() {
-    const fetchUrl = 'http://localhost:5000';
-    axios(fetchUrl)
-      .then((res) => {
-        this.setState({
-          fetchedValue: res.data.value,
-        })
-      })
-      .catch((err) => console.log(err));
+  _renderRoutes = () => {
+    return (
+      <Switch>
+        <Route exact path = '/feeds' component = {Feeds} />
+        <Redirect to = '/feeds' />
+      </Switch>
+    )
   }
   render() {
-    const { fetchedValue } = this.state;
     return (
       <div>
-        <label>{fetchedValue}</label>
+        {this._renderRoutes()}
       </div>
     );
   }
