@@ -5,5 +5,6 @@ export const Scenes = {
 export const SharedUI = {
   Button: () => require('../shared_ui/button/button'),
   Modal: () => require('../shared_ui/modal/modal'),
-  Backdrop: () => require('../shared_ui/backdrop/backdrop')
+  Backdrop: () => require('../shared_ui/backdrop/backdrop'),
+  TextInput: () => require('../shared_ui/text_input/text_input'),
 }
