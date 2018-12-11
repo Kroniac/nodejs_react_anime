@@ -1,7 +1,7 @@
 const express = require('express');
 const feedRoutes = require('./routes/feed');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 const app = express();
 
 app.use(bodyParser.json());
@@ -15,4 +15,6 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 
-app.listen(5000);
+mongoose.connect('mongodb+srv://farid:7Oe8xKbCWRyK5Wbl@myblogger-x46xi.mongodb.net/test?retryWrites=true')
+.then(() => app.listen(5000))
+.catch((err) => console.log(err));
