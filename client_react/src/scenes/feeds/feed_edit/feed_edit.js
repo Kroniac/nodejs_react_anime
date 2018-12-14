@@ -53,6 +53,11 @@ class FeedEdit extends Component {
           onChangeText = {this._onChangeTextHandler}
           title = 'Title'
         />
+        <input
+          type = 'file'
+          name = 'File Picker'
+          accept = 'image/*'
+        />
         <AnimatedTextInput
           attrName = 'content'
           inputValue = {this.state.content}
