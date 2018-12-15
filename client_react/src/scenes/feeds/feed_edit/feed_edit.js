@@ -32,7 +32,7 @@ class FeedEdit extends Component {
 
     axios(reqConfig)
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response));
   }
 
   render() {
