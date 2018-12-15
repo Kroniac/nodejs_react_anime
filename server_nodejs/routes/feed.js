@@ -6,6 +6,9 @@ const router = express.Router();
 // GET /feed/posts
 router.get('/posts', feedController.getPosts);
 
+// GET single post
+router.get('post/:postId', feedController.getPost);
+
 // POST /feed/post
 router.post('/post', [
   body('title').trim().isLength({ min: 5 }),

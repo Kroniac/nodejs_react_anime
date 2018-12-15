@@ -22,8 +22,9 @@ export default class Feeds extends Component {
     const fetchUrl = 'http://localhost:5000/feed/posts';
     axios(fetchUrl)
       .then((res) => {
+        console.log(res);
         this.setState({
-          feedsData: res.data.posts,
+          feedsData: res.data.results,
         })
       })
       .catch((err) => console.log(err));
