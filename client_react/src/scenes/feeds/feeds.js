@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SinglePost } from './single_post/single_post'
+import { Post } from './post/post'
 import { SharedUI } from '../../config/import_paths';
 import axios from 'axios';
 import Styles from './feeds.module.css';
@@ -56,7 +56,7 @@ export default class Feeds extends Component {
           New Post
         </Button>
         {feedsData.map(post => (
-          <SinglePost
+          <Post
             key = {post._id}
             post  = {post}
           />

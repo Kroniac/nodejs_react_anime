@@ -1,5 +1,6 @@
 export const Scenes = {
   Feeds: () => require('../scenes/feeds/feeds').default,
+  SinglePost: () => require('../scenes/single_post/single_post').default,
 }
 
 export const SharedUI = {

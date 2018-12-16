@@ -5,12 +5,14 @@ import axios from 'axios';
 import './App.css';
 
 const Feeds = Scenes.Feeds();
+const SinglePost = Scenes.SinglePost();
 
 class App extends Component {
   _renderRoutes = () => {
     return (
       <Switch>
         <Route exact path = '/feeds' component = {Feeds} />
+        <Route path = '/feeds/:postId/' component = {SinglePost} />
         <Redirect to = '/feeds' />
       </Switch>
     )
