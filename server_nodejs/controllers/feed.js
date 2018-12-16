@@ -23,7 +23,7 @@ exports.getPost = (req, res, next) => {
         error.status = 404;
         throw error;
       }
-      res.status(200).json({ message : 'Post Fetched', data: post });
+      res.status(200).json({ message : 'Post Fetched', results: post });
     })
     .catch((err) => {
       if(!err.status) {
