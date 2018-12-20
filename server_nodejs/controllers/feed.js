@@ -41,12 +41,20 @@ exports.createPost = (req, res, next) => {
     error.errors = errors.array();
     throw error;
   }
+  if (!req.file) {
+    const error = new Error('No image provided');
+    error.status = 422;
+    error.errors = [];
+    throw error;
+  }
+  const imageUrl = req.file.path.replace("\\" ,"/");
   const title = req.body.title;
   const content = req.body.content;
   
   const post =  new Post({
     title,
     content,
+    imageUrl,
   });
 
   post.save()
