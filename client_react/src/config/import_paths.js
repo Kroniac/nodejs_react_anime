@@ -9,3 +9,7 @@ export const SharedUI = {
   Backdrop: () => require('../shared_ui/backdrop/backdrop'),
   TextInput: () => require('../shared_ui/text_input/text_input'),
 }
+
+export const Libs = {
+  Utils: () => require('../libs/utils'),
+}

@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { SharedUI } from '../../../config/import_paths';
+import { SharedUI, Libs } from '../../../config/import_paths';
 import axios from 'axios';
 
+const { GenerateBase64FromImage } = Libs.Utils();
 
 const { Modal } = SharedUI.Modal();
 const { Backdrop } = SharedUI.Backdrop();
@@ -11,23 +12,29 @@ class FeedEdit extends Component {
   state = {
     title: '',
     content: '',
+    image: null,
   }
 
   _onChangeTextHandler = (attrName, value) => {
     this.setState({ [attrName]: value });
   }
 
+  _onChangeFileHandler = (attrName, value, files) => {
+    console.log(files)
+    this.setState({ [attrName]: files[0] });
+  }
+
   _submitNewPostToServer = () => {
-    const { title, content } = this.state;
+    const { title, content, image } = this.state;
     const postUrl = 'http://localhost:5000/feed/post';
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('image', image);
     const reqConfig = {
       url: postUrl,
       method: 'POST',
-   
-      data: {
-        title,
-        content,
-      },
+      data: formData,
     }
 
     axios(reqConfig)
@@ -56,7 +63,7 @@ class FeedEdit extends Component {
         <input
           type = 'file'
           name = 'File Picker'
-          accept = 'image/*'
+          onChange = {(e) => this._onChangeFileHandler('image', e.target.value, e.target.files)}
         />
         <AnimatedTextInput
           attrName = 'content'

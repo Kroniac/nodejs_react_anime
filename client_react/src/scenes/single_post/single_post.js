@@ -25,19 +25,22 @@ export default class SinglePost extends Component {
   }
   render() {
     const { data } = this.state;
+    console.log(data);
     return (
       <div className = {Styles.root}>
        <div>This is a single post</div>
        <div>{data.title}</div>
        <div>{data.content}</div>
-       <div
-        className="image"
-        style={{
-          backgroundImage: `url('${data.imageUrl}')`,
-          backgroundSize: 'contain',
-          backgroundPosition: 'center'
-        }}
-      />
+       <div className = {Styles.imageContainer}>
+        <div
+          className = {Styles.image}
+          style = {{
+            backgroundImage: `url('http://localhost:5000/${data.imageUrl}')`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center'
+          }}
+        />
+      </div>
       </div>
     )
   }
