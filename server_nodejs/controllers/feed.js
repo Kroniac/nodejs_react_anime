@@ -85,7 +85,8 @@ exports.updatePost = (req, res, next) => {
   const postId = req.params.postId;
   const title = req.body.title;
   const content = req.body.content;
-  const imageUrl = req.body.imageUrl;
+  let imageUrl = req.body.image;
+  console.log(postId)
   if (req.file) imageUrl = req.file.path;
   if (!imageUrl) {
     const error = new Error('No file picked');

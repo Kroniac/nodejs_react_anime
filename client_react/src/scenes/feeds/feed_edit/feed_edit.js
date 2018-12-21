@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { SharedUI, Libs } from '../../../config/import_paths';
-import axios from 'axios';
 
 const { Modal } = SharedUI.Modal();
 const { Backdrop } = SharedUI.Backdrop();
@@ -8,10 +7,18 @@ const { AnimatedTextInput } = SharedUI.TextInput();
 
 class FeedEdit extends Component {
   state = {
-    title: '',
-    content: '',
-    image: null,
+    title: this.props.selectedPost ? this.props.selectedPost.title : '',
+    content: this.props.selectedPost ? this.props.selectedPost.content : '',
+    image: this.props.selectedPost ? this.props.selectedPost.imageUrl : null,
   }
+
+  constructor(props) {
+    super(props);
+    console.log('hello')
+    console.log(props);
+  }
+
+  baseState = { ...this.state };
 
   _onChangeTextHandler = (attrName, value) => {
     this.setState({ [attrName]: value });
@@ -22,22 +29,17 @@ class FeedEdit extends Component {
     this.setState({ [attrName]: files[0] });
   }
 
-  _submitNewPostToServer = () => {
+  _onAcceptHandler = () => {
     const { title, content, image } = this.state;
-    const postUrl = 'http://localhost:5000/feed/post';
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('image', image);
-    const reqConfig = {
-      url: postUrl,
-      method: 'POST',
-      data: formData,
+    const post = {
+      title, content, image,
     }
+    this.props.onFinishEdit(post);
+  }
 
-    axios(reqConfig)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.response));
+  _onCancelModalHandler = () => {
+    this.setState(this.baseState);
+    this.props.onCancelEdit();
   }
 
   render() {
@@ -47,8 +49,8 @@ class FeedEdit extends Component {
         <Modal
           title="New Post"
           acceptEnabled={true}
-          onCancelModal={this.props.onCancelEdit}
-          onAcceptModal={this._submitNewPostToServer}
+          onCancelModal={this._onCancelModalHandler}
+          onAcceptModal={this._onAcceptHandler}
           isLoading={this.props.loading}
         >
         <form>
