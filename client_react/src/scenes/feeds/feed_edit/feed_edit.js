@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { SharedUI, Libs } from '../../../config/import_paths';
 import axios from 'axios';
 
-const { GenerateBase64FromImage } = Libs.Utils();
-
 const { Modal } = SharedUI.Modal();
 const { Backdrop } = SharedUI.Backdrop();
 const { AnimatedTextInput } = SharedUI.TextInput();
