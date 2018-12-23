@@ -73,6 +73,22 @@ export default class Feeds extends Component {
       .catch((err) => console.log(err.response));
   }
 
+  _deletePostHandler = (post, rowIndex) => {
+    const postUrl = 'http://localhost:5000/feed/post/' + post._id;
+    const reqConfig = {
+      url: postUrl,
+      method: 'DELETE',
+    }
+    axios(reqConfig)
+      .then((res) => {
+        const updatedFeedsData = [...this.state.feedsData];
+        updatedFeedsData.splice(rowIndex, 1);
+        this.setState({ feedsData: updatedFeedsData });
+        
+      })
+      .catch((err) => console.log(err.response));
+  }
+
   render() {
     const { feedsData } = this.state;
     return (
@@ -91,11 +107,13 @@ export default class Feeds extends Component {
           New Post
         </Button>
         </section>
-        {feedsData.map(post => (
+        {feedsData.map((post, rowIndex) => (
           <Post
             key = {post._id}
             post  = {post}
+            rowIndex = {rowIndex}
             editPostHandler = {this._editPostHandler}
+            deletePostHandler = {this._deletePostHandler}
           />
         ))}
       </div>

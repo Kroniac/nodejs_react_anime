@@ -7,6 +7,10 @@ export class Post extends PureComponent {
   _editPostHandler = () => {
     this.props.editPostHandler(this.props.post);
   }
+  _deletePostHandler = () => {
+    this.props.deletePostHandler(this.props.post, this.props.rowIndex);
+  }
+
   render() {
     const { post } = this.props;
     return (
@@ -30,6 +34,12 @@ export class Post extends PureComponent {
             onClick = {this._editPostHandler}        
           >
             Edit
+          </button>
+          <button
+            className = {Styles.link} 
+            onClick = {this._deletePostHandler}        
+          >
+            Delete
           </button>
         </div>
       </div>
