@@ -30,7 +30,8 @@ export class Post extends PureComponent {
             View
           </Link>
           <button
-            className = {Styles.link} 
+            className = {Styles.link}
+            style = {{ marginRight: 3 }}
             onClick = {this._editPostHandler}        
           >
             Edit
