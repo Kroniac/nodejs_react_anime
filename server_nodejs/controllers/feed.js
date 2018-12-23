@@ -4,9 +4,25 @@ const { validationResult } = require('express-validator/check')
 const Post = require('../models/post');
 
 exports.getPosts = (req, res, next) => {
+  const currentPage = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize, 10) || 10;
+  let totalItems = 0;
   Post.find()
+    .countDocuments()
+    .then((count) => {
+      totalItems = count;
+      lastPage = Math.ceil(totalItems/pageSize);
+      return Post.find()
+        .skip((currentPage - 1) * pageSize)
+        .limit(pageSize)
+    })
     .then((posts) => {
-      res.status(200).json({ message: 'Posts Fetched', results: posts });
+      res.status(200).json({
+        message: 'Posts Fetched',
+        results: posts,
+        nextPage: currentPage === lastPage ? null : currentPage + 1,
+        totalItems
+      });
     })
     .catch((err) => {
       if(!err.status) {
