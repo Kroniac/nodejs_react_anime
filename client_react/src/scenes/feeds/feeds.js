@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Qs from 'qs';
 import { Post } from './post/post'
 import { SharedUI } from '../../config/import_paths';
 import axios from 'axios';
@@ -14,20 +15,32 @@ export default class Feeds extends Component {
     editPost: null,
   }
 
+  nextPage = 1;
+
   componentDidMount() {
     this._fetchFeedsData();
   }
 
-  _fetchFeedsData = () => {
-    const fetchUrl = 'http://localhost:5000/feed/posts';
-    axios(fetchUrl)
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          feedsData: res.data.results,
+  _fetchFeedsData = (page = 1) => {
+    if (this.nextPage !== null) {
+      const params = {
+        page,
+        pageSize: 2,
+      }
+      const urlParameters = Qs.stringify(params);
+      const fetchUrl = `http://localhost:5000/feed/posts?${urlParameters}`;
+      axios(fetchUrl)
+        .then((res) => {
+          console.log(res);
+          this.nextPage = res.data.nextPage;
+          if (page === 1) this.setState({ feedsData: res.data.results });
+          else {
+            const updatedFeedsData = [...this.state.feedsData, ...res.data.results];
+            this.setState({ feedsData: updatedFeedsData });
+          }
         })
-      })
-      .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
+    } else console.log('no more data');
   }
 
   _newPostHandler = () => {
@@ -89,6 +102,10 @@ export default class Feeds extends Component {
       .catch((err) => console.log(err.response));
   }
 
+  _loadMoreHandler = () => {
+    this._fetchFeedsData(this.nextPage);
+  }
+
   render() {
     const { feedsData } = this.state;
     return (
@@ -116,6 +133,11 @@ export default class Feeds extends Component {
             deletePostHandler = {this._deletePostHandler}
           />
         ))}
+        <section className= {Styles.newPost}>
+          <Button mode="raised" design="accent" onClick={this._loadMoreHandler}>
+            Load More
+          </Button>
+        </section>
       </div>
     )
   }
