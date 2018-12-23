@@ -86,7 +86,6 @@ exports.updatePost = (req, res, next) => {
   const title = req.body.title;
   const content = req.body.content;
   let imageUrl = req.body.image;
-  console.log(postId)
   if (req.file) imageUrl = req.file.path;
   if (!imageUrl) {
     const error = new Error('No file picked');
@@ -123,4 +122,28 @@ exports.updatePost = (req, res, next) => {
 const clearImage = (filePath) => {
   const absoluteFilePath = path.join(__dirname,'..', filePath);
   fs.unlink(absoluteFilePath, err => console.log(err));
+}
+
+exports.deletePost = (req, res, next) => {
+  const postId = req.params.postId;
+  Post.findById(postId)
+    .then((post) => {
+      if(!post) {
+        const error = new Error("Couldn't find post");
+        error.status = 404;
+        throw error;
+      }
+      return post.delete();
+    })
+    .then((result) => {
+      res.status(200).json({
+        message: 'Post deleted successfully!',
+      });
+    })
+    .catch((err) => {
+      if(!err.status) {
+        err.status = 500;
+      }
+      next();
+    })
 }
