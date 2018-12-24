@@ -20,7 +20,7 @@ exports.getPosts = (req, res, next) => {
       res.status(200).json({
         message: 'Posts Fetched',
         results: posts,
-        nextPage: currentPage === lastPage ? null : currentPage + 1,
+        nextPage: currentPage >= lastPage ? null : currentPage + 1,
         totalItems
       });
     })
