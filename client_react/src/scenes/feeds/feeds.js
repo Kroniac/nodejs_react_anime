@@ -20,7 +20,21 @@ export default class Feeds extends Component {
 
   componentDidMount() {
     this._fetchFeedsData();
-    OpenSocket('http://localhost:5000/')
+    const socket = OpenSocket('http://localhost:5000/');
+    socket.on('posts', data => {
+      if (data.action === 'create') {
+        this._addPost(data.post);
+      }
+    })
+  }
+
+  _addPost = (post) => {
+    console.log(post);
+    if (this.nextPage - 1 === 1) {
+      const updatedPosts = [...this.state.feedsData];
+      updatedPosts.unshift(post);
+      this.setState({ feedsData: updatedPosts });
+    }
   }
 
   _fetchFeedsData = (page = 1) => {
