@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Qs from 'qs';
+import OpenSocket from 'socket.io-client';
 import { Post } from './post/post'
 import { SharedUI } from '../../config/import_paths';
 import axios from 'axios';
@@ -19,6 +20,7 @@ export default class Feeds extends Component {
 
   componentDidMount() {
     this._fetchFeedsData();
+    OpenSocket('http://localhost:5000/')
   }
 
   _fetchFeedsData = (page = 1) => {
