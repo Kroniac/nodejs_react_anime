@@ -1,0 +1,189 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+  background: url(../../images/ghoul.jpg) no-repeat center center fixed;
+}
+
+.colorOverlay {
+  width: 100%;
+  height: 100%;
+  background: blue;
+  opacity: 0.4;
+  position: absolute;
+}
+
+.imageContainer {
+  display: flex;
+  width: 150px;
+  height: 250px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imageStyle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.imageStyle:hover {
+  transform: scale(1.1);
+}
+
+.container {
+  display: flex;
+  position: relative;
+  height: 300px;
+  width: 350px;
+  margin: 1px 0px 0px 1px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contentContainer {
+  z-index: 1;
+  display: flex;
+  max-width: 1100px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+figure {
+
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  background: #3085a3;
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+ 
+}
+
+figure img {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  max-width: 100%;
+  opacity: 0.8;
+  object-fit: cover;
+}
+
+figure figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.25em;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+figure figcaption::before,
+figure figcaption::after {
+  pointer-events: none;
+}
+
+figure figcaption {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+/* Anchor will cover the whole item by default */
+
+
+/* For some effects it will show as a button */
+
+
+figure h2 {
+  word-spacing: -0.15em;
+  font-weight: 300;
+}
+
+figure h2 span {
+  font-weight: 800;
+}
+
+figure h2,
+figure p {
+  margin: 0;
+}
+
+figure p {
+  align-self: center;
+  letter-spacing: 1px;
+  font-size: 68.5%;
+}
+
+figure.effectRuby {
+  background-color: #17819c;
+}
+
+figure.effectRuby img {
+  opacity: 1;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+figure.effectRuby:hover img {
+  opacity: 0.4;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+figure.effectRuby h2 {
+  opacity: 0;
+  margin-top: 20%;
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  -webkit-transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 20px, 0);
+}
+
+figure.effectRuby p {
+ 
+  padding: 3em;
+  border: 1px solid #fff;
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(0, 20px, 0) scale(1.1);
+  transform: translate3d(0, 20px, 0) scale(1.1);
+}
+
+figure.effectRuby:hover h2 {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+figure.effectRuby:hover p {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.textStyle {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+}
+

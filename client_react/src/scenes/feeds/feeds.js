@@ -126,6 +126,7 @@ export default class Feeds extends Component {
     const { feedsData } = this.state;
     return (
       <div className = {Styles.root} >
+        <Carasol />
         {this.state.isEditing ? (
           <FeedEdit
             editing={this.state.isEditing}
@@ -154,6 +155,33 @@ export default class Feeds extends Component {
             Load More
           </Button>
         </section>
+      </div>
+    )
+  }
+}
+
+
+class Carasol extends Component {
+  render() {
+    return (
+      <div className = {Styles.wrapper}>
+      <div className = {Styles.carasolContainer}>
+        <img
+          className = {Styles.carasolImage}
+          src = 'https://i.ytimg.com/vi/yxPhb2kCNMk/maxresdefault.jpg'
+          alt = 'This is a'
+        />
+        <img
+          className = {Styles.carasolImage}
+          src = 'https://static.bandainamcoent.eu/high/black-clover/black-clover/00-page-setup/black-clover_title_top-visual_1920x912.jpg'
+          alt = 'This is a'
+        />
+        <img
+          className = {Styles.carasolImage}
+          src = 'https://sirusgaming.com/wp-content/uploads/2018/04/black-clover-01.jpg'
+          alt = 'This is a'
+        />
+      </div>
       </div>
     )
   }

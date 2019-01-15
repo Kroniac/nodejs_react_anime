@@ -6,20 +6,22 @@ import './App.css';
 
 const Feeds = Scenes.Feeds();
 const SinglePost = Scenes.SinglePost();
+const Home = Scenes.Home();
 
 class App extends Component {
   _renderRoutes = () => {
     return (
       <Switch>
+        <Route exact path = '/home' component = {Home} />
         <Route exact path = '/feeds' component = {Feeds} />
         <Route path = '/feeds/:postId/' component = {SinglePost} />
-        <Redirect to = '/feeds' />
+        <Redirect to = '/home' />
       </Switch>
     )
   }
   render() {
     return (
-      <div>
+      <div className = 'App' >
         {this._renderRoutes()}
       </div>
     );
