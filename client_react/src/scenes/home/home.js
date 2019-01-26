@@ -38,6 +38,7 @@ export default class Home extends Component  {
   ];
 
   render() {
+    const { history } = this.props;
     return (
       <div className = {Styles.root} >
         <div className = {Styles.colorOverlay} />
@@ -48,6 +49,7 @@ export default class Home extends Component  {
                   imageSrc = {field.imageSrc}
                   title = {field.title}
                   content = {field.content}
+                  history = {history}
                 />
               ))
             }
@@ -64,10 +66,14 @@ class ImageCardBox extends PureComponent {
     content: string.isRequired,
   }
 
+  _onImageCardBoxClick = () => {
+    this.props.history.push('/anime_characters')
+  }
+
   render() {
     const { imageSrc, title, content } = this.props;
     return (
-      <div className = {Styles.container} >
+      <div className = {Styles.container} onClick = {this._onImageCardBoxClick} >
         <figure className = {Styles.effectRuby} >
           <img src = {imageSrc} alt = {title}/>
           <figcaption>

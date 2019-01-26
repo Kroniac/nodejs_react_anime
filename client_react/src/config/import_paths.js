@@ -2,6 +2,7 @@ export const Scenes = {
   Feeds: () => require('../scenes/feeds/feeds').default,
   SinglePost: () => require('../scenes/single_post/single_post').default,
   Home: () => require('../scenes/home/home').default,
+  AnimeCharacters: () => require('../scenes/anime_characters/anime_characters').default,
 }
 
 export const SharedUI = {
