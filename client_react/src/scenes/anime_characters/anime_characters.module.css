@@ -3,11 +3,8 @@
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-body {
-  height: 100%;
-  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .buttons {
@@ -48,57 +45,103 @@ body {
 .carasoul .prev {
   z-index: 5;
   left: 30%;
-  transform: translateY(50px) translateX(-50%);
+  width: 300px;
+  height: 300px;
+  transform: translateY(40%) translateX(-100%);
 }
 
 .carasoul  .selected {
   z-index: 10;
   left: 50%;
-  transform: translateY(0px) translateX(-50%);
+  height: 470px;
+  width: 470px;
+  border-radius: 5px;
+  transform: translateY(10%) translateX(-95%);
 }
 
-.carasoul  .prev img {
-  width: 300px;
+.carasoul .selected img {
+  width: 180px;
+  height: 250px;
+  top: -120px;
+  left: 0;
+  position: absolute;
+}
+
+.carasoul .prev img {
+  width: 150px;
+  top: -120px;
+  left: 0;
+  position: absolute;
 }
 
 .carasoul {
   position: relative;
-  height: 400px;
+  height: 80%;
+  width:95%;
   top: 50%;
+  border-style: solid;
   transform: translateY(-50%);
-  overflow: hidden;
 }
 
 
 .carasoul div {
   position: absolute;
-  transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background: whitesmoke;
+  transition: transform 1s, width 1s, height 1s, left 1s, opacity 1s, z-index 0s;
   opacity: 1;
 }
 
 .carasoul img {
   width: 400px;
-  transition: width 1s;
+  object-fit: cover;
+  transition: width 1s, height 1s;
 }
 
 .carasoul .hideLeft {
   left: 10%;
   opacity: 0;
+  width: 150px;
+  height: 150px;
   transform: translateY(50%) translateX(-50%);
+}
+
+.carasoul .hideLeft img {
+  width: 70px;
+  height: 100px;
+  top: -50px;
+  left: 0;
+  position: absolute;
 }
 
 .carasoul .next {
   z-index: 5;
   left: 70%;
-  transform: translateY(50px) translateX(-50%);
+  width: 150px;
+  height: 150px;
+  transform: translateY(250px) translateX(10%);
 }
 
 .carasoul .next img {
-  width: 300px;
+  width: 70px;
+  height: 100px;
+  top: -50px;
+  left: 0;
+  position: absolute;
 }
 
 .carasoul .hideRight {
-  left: 100%;
+  left: 90%;
   opacity: 0;
+  width: 150px;
+  height: 150px;
   transform: translateY(50%) translateX(-50%);
+}
+
+.carasoul .hideRight img {
+  width: 0px;
+  height: 0px;
+  top: -50px;
+  left: 0;
+  position: absolute;
 }
