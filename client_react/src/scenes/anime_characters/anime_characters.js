@@ -130,7 +130,6 @@ class AnimeCharacters extends Component {
         <img src={this.state.image5} />
       </div>
       </div>
-      </div>
       <div className = {Styles.buttons} >
       <Button mode="raised" design="accent" onClick={this._prevCard}>
           Prev
@@ -139,6 +138,8 @@ class AnimeCharacters extends Component {
           Next
       </Button>
       </div>
+      </div>
+      
       </div>
 
     )
