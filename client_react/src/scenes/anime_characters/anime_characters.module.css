@@ -61,8 +61,8 @@
 }
 
 .carasoul .selected img {
-  width: 180px;
-  height: 240px;
+  width: 250px;
+  height: 350px;
   top: -90px;
   left: 0;
   position: absolute;
@@ -91,7 +91,6 @@
 .carasoul div {
   position: absolute;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background: white;
   transition: transform 1s, width 1s, height 1s, left 1s, opacity 1s, z-index 0s;
   opacity: 1;
 }
@@ -149,4 +148,62 @@
   top: -50px;
   left: 0;
   position: absolute;
+}
+
+.carasoul .selected .cardTitle {
+  opacity: 1;
+  display: flex;
+  flex: 1;
+  font-size: 19px;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  padding-top: 10px;
+}
+.carasoul .selected .cardDetailText {
+  opacity: 1;
+  display: flex;
+  flex: 1;
+  font-size: 17px;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.cardHeaderSection {
+  display: flex;
+  flex: 1;
+  transition: transform 1s, width 1s, height 1s;
+}
+
+.carasoul .selected .cardHeaderSection {
+  height: 265px;
+}
+
+.carasoul .next .cardHeaderSection {
+  height: 100px;
+}
+
+.cardTitle {
+  transition: transform 1s;
+}
+
+.cardDetailText {
+  transition: transform 1s;
+}
+
+.carasoul .next .cardTitle {
+
+  opacity: 0;
+}
+
+.carasoul .next .cardDetailText {
+
+  opacity: 0;
+}
+
+
+.carasoul .selected .imager {
+  width: 240px;
 }
