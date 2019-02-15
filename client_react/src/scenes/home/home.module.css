@@ -113,7 +113,8 @@ figure figcaption {
 
 figure h2 {
   word-spacing: -0.15em;
-  font-weight: 300;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 figure h2 span {
@@ -127,8 +128,9 @@ figure p {
 
 figure p {
   align-self: center;
-  letter-spacing: 1px;
-  font-size: 68.5%;
+  font-size: 17px;
+  font-weight: bold;
+
 }
 
 figure.effectRuby {
