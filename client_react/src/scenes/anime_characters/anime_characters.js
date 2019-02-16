@@ -12,13 +12,13 @@ class AnimeCharacters extends Component {
         background_color: 'linear-gradient(to top right, red , orange)',
         image: require('../../images/goku1.png'),
         title: 'Son Goku',
-        detail: 'Goku is a Saiyan',
+        detail: 'Goku (孫そん悟ご空くう Son Gokū), born Kakarot (カカロット Kakarotto, lit. "Cacarrot"), is a male Saiyan and the main protagonist of the Dragon Ball series.',
       },
       {
         background_color: 'linear-gradient(to top right, blue , lightblue)',
         image: require('../../images/vegeta.png'),
         title: 'Vegeta',
-        detail: 'Goku is a Saiyan',
+        detail: 'Vegeta (ベジータ Bejīta), more specifically Vegeta IV (ベジータ四世 Bejīta IV, "Vegeta the Fourth")[5], is the prince of the fallen Saiyan race and the deuteragonist of the Dragon Ball series. He is the eldest son of Vegeta III, the older brother of Tarble, the husband of Bulma, the father of Trunks and Bulla, and the ancestor of Vegeta Jr.',
       },
       {
         background_color: 'linear-gradient(to top right, red , orange)',
@@ -63,7 +63,6 @@ class AnimeCharacters extends Component {
       image5: this.images[2]
     }
   }
-  
 
   _prevCard = () => {
     if (this.selectedImageIndex === 0) console.log('No Prev Images');

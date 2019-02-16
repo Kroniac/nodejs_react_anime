@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const feedRoutes = require('./routes/feed');
+const animeRoutes = require('./routes/anime');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/feed', feedRoutes);
+app.use('/anime', animeRoutes);
 app.use((error, req, res, next) => {
   console.log(error);
   const status = error.status;
@@ -47,12 +49,13 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message, errors: error.errors });
 })
 
-mongoose.connect('mongodb+srv://farid:7Oe8xKbCWRyK5Wbl@myblogger-x46xi.mongodb.net/test?retryWrites=true')
+mongoose.connect('mongodb+srv://farid:7Oe8xKbCWRyK5Wbl@myblogger-x46xi.mongodb.net/anime?retryWrites=true')
 .then(() => {
-  const server = app.listen(5000);
-  const io = require('./socket').init(server);
-  io.on('connection', socket => {
-    console.log('Client Connected');
-  });
+  app.listen(5000);
+  // const server = app.listen(5000);
+  // const io = require('./socket').init(server);
+  // io.on('connection', socket => {
+  //   console.log('Client Connected');
+  // });
 })
 .catch((err) => console.log(err));

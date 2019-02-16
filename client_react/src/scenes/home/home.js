@@ -1,8 +1,23 @@
 import React, { Component, PureComponent } from 'react';
 import { string } from 'prop-types';
+import axios from 'axios';
 import Styles from './home.module.css';
 
 export default class Home extends Component  {
+
+  componentDidMount() {
+    this._fetchAnimesData();
+  }
+
+  _fetchAnimesData = (page = 1) => {
+      const fetchUrl = `http://localhost:5000/anime/anime`;
+      axios(fetchUrl)
+        .then((res) => {
+          console.log(res.data);
+          // this.setState({ feedsData: res.data.results });
+        })
+        .catch((err) => console.log(err));
+  }
 
   imageCardFields = [
     {

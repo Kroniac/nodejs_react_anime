@@ -9,6 +9,7 @@
 
 .buttons {
   position: fixed;
+  z-index: 20;
   left: 70%;
   transform: translateX(10%);
   bottom: 50px;
@@ -186,23 +187,16 @@
 }
 
 .cardTitle {
+  font-size: 0px;
+  opacity: 0;
   transition: transform 1s;
 }
 
 .cardDetailText {
+  font-size: 0px;
+  opacity: 0;
   transition: transform 1s;
 }
-
-.carasoul .next .cardTitle {
-
-  opacity: 0;
-}
-
-.carasoul .next .cardDetailText {
-
-  opacity: 0;
-}
-
 
 .carasoul .selected .imager {
   width: 240px;
