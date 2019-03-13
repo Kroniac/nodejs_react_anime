@@ -7,7 +7,9 @@ const { Button } = SharedUI.Button();
 class AnimeCharacters extends Component {
   constructor(props) {
     super(props);
-    this.images = [
+    console.log(this.props);
+    this.images = this.props.location.state.charactersList;
+    this.imagesX = [
       {
         background_color: 'linear-gradient(to top right, red , orange)',
         image: require('../../images/goku1.png'),
@@ -58,9 +60,9 @@ class AnimeCharacters extends Component {
       hideRight: Styles.hideRight,
       image1: null,
       image2: null,
-      image3: this.images[0],
-      image4: this.images[1],
-      image5: this.images[2]
+      image3: this.images.length > 0 ? this.images[0] : null,
+      image4: this.images.length > 1 ? this.images[1] : null,
+      image5: this.images.length > 2 ?  this.images[2] : null,
     }
   }
 
@@ -142,7 +144,7 @@ class AnimeCharacters extends Component {
             <div style = {{ backgroundImage: image1.background_color }} className={this.state.hideLeft}>
               <span className = {Styles.cardHeaderSection} >
               <span className = {Styles.imager} >
-                <img src={this.state.image1.image} />
+                <img src={this.state.image1.image_url} />
               </span>
               <div>
               </div>
@@ -163,7 +165,7 @@ class AnimeCharacters extends Component {
             <div style = {{ backgroundImage: image2.background_color }} className = {this.state.prev}>
               <span className = {Styles.cardHeaderSection} >
               <span className = {Styles.imager} >
-                <img src={this.state.image2.image} />
+                <img src={this.state.image2.image_url} />
               </span>
               <div>
               </div>
@@ -184,7 +186,7 @@ class AnimeCharacters extends Component {
             <div style = {{ backgroundImage: image3.background_color }} className = {this.state.selected}>
             <span className = {Styles.cardHeaderSection} >
               <span className = {Styles.imager} >
-                <img src={this.state.image3.image} />
+                <img src={this.state.image3.image_url} />
               </span>
               <div>
               </div>
@@ -205,7 +207,7 @@ class AnimeCharacters extends Component {
             <div style = {{ backgroundImage: image4.background_color }} className = {this.state.next}>
                 <span className = {Styles.cardHeaderSection} >
               <span className = {Styles.imager} >
-                <img src={this.state.image4.image} />
+                <img src={this.state.image4.image_url} />
               </span>
               <div>
               </div>
@@ -226,7 +228,7 @@ class AnimeCharacters extends Component {
             <div style = {{ backgroundImage: image5.background_color }} className = {this.state.hideRight}>
               <span className = {Styles.cardHeaderSection} >
               <span className = {Styles.imager} >
-                <img src={this.state.image5.image} />
+                <img src={this.state.image5.image_url} />
               </span>
               <div>
               </div>
