@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const feedRoutes = require('./routes/feed');
 const animeRoutes = require('./routes/anime');
 const characterListRoutes = require('./routes/characters_list');
 const bodyParser = require('body-parser');
@@ -40,7 +39,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/feed', feedRoutes);
 app.use('/anime', animeRoutes);
 app.use('/characters_list', characterListRoutes)
 app.use((error, req, res, next) => {
