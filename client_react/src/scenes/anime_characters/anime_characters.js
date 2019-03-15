@@ -1,14 +1,41 @@
 import React, { Component } from 'react';
+import { oneOfType, string, number, object, shape } from 'prop-types';
 import Styles from './anime_characters.module.css';
 import { SharedUI } from '../../config/import_paths';
 
 const { Button } = SharedUI.Button();
 
 class AnimeCharacters extends Component {
+  selectedImageIndex = 0;
+
+  prevImage = -2;
+
+  nextImage = 2;
+
+  currentHideLeftPosition = 1;
+
+  currentHideRightPosition = 5;
+
+  nextPressed = {
+    [Styles.selected]: Styles.next,
+    [Styles.prev]: Styles.selected,
+    [Styles.hideLeft]: Styles.prev,
+    [Styles.next]: Styles.hideRight,
+    [Styles.hideRight]: Styles.hideLeft,
+  }
+
+  prevPressed = {
+    [Styles.selected]: Styles.prev,
+    [Styles.prev]: Styles.hideLeft,
+    [Styles.hideLeft]: Styles.hideRight,
+    [Styles.hideRight]: Styles.next,
+    [Styles.next]: Styles.selected,
+  }
+
   constructor(props) {
     super(props);
-    console.log(this.props);
-    this.images = this.props.location.state.charactersList;
+    const { location } = this.props;
+    this.images = location.state.charactersList;
     this.imagesX = [
       {
         background_color: 'linear-gradient(to top right, red , orange)',
@@ -46,11 +73,8 @@ class AnimeCharacters extends Component {
         title: 'Broly',
         detail: 'Goku is a Saiyan',
       },
-      
-      
-      
-      
     ];
+
     this.state = {
       currentImage: 0,
       prev: Styles.prev,
@@ -62,7 +86,7 @@ class AnimeCharacters extends Component {
       image2: null,
       image3: this.images.length > 0 ? this.images[0] : null,
       image4: this.images.length > 1 ? this.images[1] : null,
-      image5: this.images.length > 2 ?  this.images[2] : null,
+      image5: this.images.length > 2 ? this.images[2] : null,
     }
   }
 
@@ -72,7 +96,7 @@ class AnimeCharacters extends Component {
       this.currentHideLeftPosition = (this.currentHideLeftPosition + 1) % 6 || 1;
       this.currentHideRightPosition = (this.currentHideRightPosition + 1) % 6 || 1;
       this.selectedImageIndex -= 1;
-      this.setState((prevState) => ({
+      this.setState(prevState => ({
         prev: this.nextPressed[prevState.prev],
         selected: this.nextPressed[prevState.selected],
         hideLeft: this.nextPressed[prevState.hideLeft],
@@ -80,7 +104,9 @@ class AnimeCharacters extends Component {
         hideRight: this.nextPressed[prevState.hideRight],
       }), () => {
         ['hideLeft', 'prev', 'selected', 'next', 'hideRight'].forEach((current, index) => {
-          if (this.state[current] === Styles.hideLeft) this.setState({ [`image${index+1}`]: this.images[this.prevImage - 1] })
+          if (this.state[current] === Styles.hideLeft) {
+            this.setState({ [`image${index + 1}`]: this.images[this.prevImage - 1] })
+          }
         });
         this.prevImage -= 1;
         this.nextImage -= 1;
@@ -88,19 +114,12 @@ class AnimeCharacters extends Component {
     }
   }
 
-  selectedImageIndex = 0;
-  prevImage = -2;
-  nextImage = 2;
-  currentHideLeftPosition = 1;
-  currentHideRightPosition = 5;
-
   _nextCard = () => {
-    console.log(this.selectedImageIndex)
     if (this.selectedImageIndex + 1 < this.images.length) {
       this.currentHideLeftPosition = (this.currentHideLeftPosition - 1) || 5;
       this.currentHideRightPosition = (this.currentHideRightPosition - 1) || 5;
       this.selectedImageIndex += 1;
-      this.setState((prevState) => ({
+      this.setState(prevState => ({
         prev: this.prevPressed[prevState.prev],
         selected: this.prevPressed[prevState.selected],
         hideLeft: this.prevPressed[prevState.hideLeft],
@@ -108,7 +127,7 @@ class AnimeCharacters extends Component {
         hideRight: this.prevPressed[prevState.hideRight],
       }), () => {
         ['hideLeft', 'prev', 'selected', 'next', 'hideRight'].forEach((current, index) => {
-          if (this.state[current] === Styles.hideRight) this.setState({ [`image${index+1}`]: this.images[this.nextImage + 1] })
+          if (this.state[current] === Styles.hideRight) this.setState({ [`image${index + 1}`]: this.images[this.nextImage + 1] })
         })
         this.prevImage += 1;
         this.nextImage += 1;
@@ -116,148 +135,86 @@ class AnimeCharacters extends Component {
     } else console.log('No next images');
   }
 
-  nextPressed = {
-    [Styles.selected]: Styles.next,
-    [Styles.prev]: Styles.selected,
-    [Styles.hideLeft]: Styles.prev,
-    [Styles.next]: Styles.hideRight,
-    [Styles.hideRight]: Styles.hideLeft,
-  }
-
-  prevPressed = {
-    [Styles.selected]: Styles.prev,
-    [Styles.prev]: Styles.hideLeft,
-    [Styles.hideLeft]: Styles.hideRight,
-    [Styles.hideRight]: Styles.next,
-    [Styles.next]: Styles.selected,
-  }
-
-
+  _returnCardDetails = () => [
+    {
+      classStyles: this.state.hideLeft,
+      valueObj: this.state.image1,
+    }, {
+      classStyles: this.state.prev,
+      valueObj: this.state.image2,
+    }, {
+      classStyles: this.state.selected,
+      valueObj: this.state.image3,
+    }, {
+      classStyles: this.state.next,
+      valueObj: this.state.image4,
+    }, {
+      classStyles: this.state.hideRight,
+      valueObj: this.state.image5,
+    },
+  ]
 
   render() {
-    const { image1, image2, image3, image4, image5 } = this.state;
     return (
-      <div className = {Styles.root} >
-        <div className = {Styles.carasoul} >
-        {
-          image1 ? (
-            <div style = {{ backgroundImage: image1.background_color }} className={this.state.hideLeft}>
-              <span className = {Styles.cardHeaderSection} >
-              <span className = {Styles.imager} >
-                <img src={this.state.image1.image_url} />
-              </span>
-              <div>
-              </div>
-              <span
-                className = {Styles.cardTitle}
-              >
-                {image1.title}
-              </span>
-              </span>
-              <span className = {Styles.cardDetailText} >
-                {image1.detail}
-              </span>
-            </div>
-          ) : null
-        }
-        {
-          image2 ? (
-            <div style = {{ backgroundImage: image2.background_color }} className = {this.state.prev}>
-              <span className = {Styles.cardHeaderSection} >
-              <span className = {Styles.imager} >
-                <img src={this.state.image2.image_url} />
-              </span>
-              <div>
-              </div>
-              <span
-                className = {Styles.cardTitle}
-              >
-                {image2.title}
-              </span>
-              </span>
-              <span className = {Styles.cardDetailText} >
-                {image2.detail}
-              </span>
-            </div>
-          ) : null
-        }
-        {
-          image3 ? (
-            <div style = {{ backgroundImage: image3.background_color }} className = {this.state.selected}>
-            <span className = {Styles.cardHeaderSection} >
-              <span className = {Styles.imager} >
-                <img src={this.state.image3.image_url} />
-              </span>
-              <div>
-              </div>
-              <span
-                className = {Styles.cardTitle}
-              >
-                {image3.title}
-              </span>
-              </span>
-              <span className = {Styles.cardDetailText} >
-                {image3.detail}
-              </span>
-            </div>
-          ) : null
-        }
-        {
-          image4 ? (
-            <div style = {{ backgroundImage: image4.background_color }} className = {this.state.next}>
-                <span className = {Styles.cardHeaderSection} >
-              <span className = {Styles.imager} >
-                <img src={this.state.image4.image_url} />
-              </span>
-              <div>
-              </div>
-              <span
-                className = {Styles.cardTitle}
-              >
-                {image4.title}
-              </span>
-              </span>
-              <span className = {Styles.cardDetailText} >
-                {image4.detail}
-              </span>
-            </div>
-          ) : null
-        }
-        {
-          image5 ? (
-            <div style = {{ backgroundImage: image5.background_color }} className = {this.state.hideRight}>
-              <span className = {Styles.cardHeaderSection} >
-              <span className = {Styles.imager} >
-                <img src={this.state.image5.image_url} />
-              </span>
-              <div>
-              </div>
-              <span
-                className = {Styles.cardTitle}
-              >
-                {image5.title}
-              </span>
-              </span>
-              <span className = {Styles.cardDetailText} >
-                {image5.detail}
-              </span>
-            </div>
-          ) : null
-        }
-      <div className = {Styles.buttons} >
-      <Button mode="raised" design="accent" onClick={this._prevCard}>
-          Prev
-      </Button>
-      <Button mode="raised" design="accent" onClick={this._nextCard}>
-          Next
-      </Button>
+      <div className = {Styles.root}>
+        <div className = {Styles.carasoul}>
+          {
+            this._returnCardDetails().map(cardDetail => (
+              cardDetail.valueObj ? (
+                <ImageCard
+                  classStyles = {cardDetail.classStyles}
+                  valueObj = {cardDetail.valueObj}
+                />
+              ) : null
+            ))
+          }
+          <div className = {Styles.buttons}>
+            <Button mode = "raised" design = "accent" onClick = {this._prevCard}>
+              Prev
+            </Button>
+            <Button mode = "raised" design = "accent" onClick = {this._nextCard}>
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
-      </div>
-      
-      </div>
-
-    )
+    );
   }
 }
 
+
+class ImageCard extends Component {
+  static propTypes = {
+    classStyles: oneOfType([number, object, string]).isRequired,
+    valueObj: shape({
+      title: string.isRequired,
+      image_url: string.isRequired,
+      details: string,
+    }).isRequired,
+  }
+
+  render() {
+    const { classStyles, valueObj } = this.props;
+    return (
+      <div
+        style = {{ backgroundImage: valueObj.background_color }}
+        className = {classStyles}
+      >
+        <span className = {Styles.cardHeaderSection}>
+          <span className = {Styles.imager}>
+            <img alt = {valueObj.title} src = {valueObj.image_url} />
+          </span>
+          <span
+            className = {Styles.cardTitle}
+          >
+            {valueObj.title}
+          </span>
+        </span>
+        <span className = {Styles.cardDetailText} >
+          {valueObj.detail}
+        </span>
+      </div>
+    )
+  }
+}
 export default AnimeCharacters;
