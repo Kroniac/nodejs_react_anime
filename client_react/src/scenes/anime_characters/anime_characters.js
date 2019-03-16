@@ -210,7 +210,7 @@ class ImageCard extends Component {
             {valueObj.title}
           </span>
         </span>
-        <span className = {Styles.cardDetailText} >
+        <span className = {Styles.cardDetailText}>
           {valueObj.detail}
         </span>
       </div>
