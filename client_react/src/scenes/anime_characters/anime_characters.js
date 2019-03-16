@@ -4,6 +4,7 @@ import Styles from './anime_characters.module.css';
 import { SharedUI } from '../../config/import_paths';
 
 const { Button } = SharedUI.Button();
+const { Snackbar } = SharedUI.SnackBar();
 
 class AnimeCharacters extends Component {
   selectedImageIndex = 0;
@@ -31,6 +32,8 @@ class AnimeCharacters extends Component {
     [Styles.hideRight]: Styles.next,
     [Styles.next]: Styles.selected,
   }
+
+  snackBarRef = React.createRef();
 
   constructor(props) {
     super(props);
@@ -91,7 +94,7 @@ class AnimeCharacters extends Component {
   }
 
   _prevCard = () => {
-    if (this.selectedImageIndex === 0) console.log('No Prev Images');
+    if (this.selectedImageIndex === 0) this._openSnackBar('No Previous Images');
     else {
       this.currentHideLeftPosition = (this.currentHideLeftPosition + 1) % 6 || 1;
       this.currentHideRightPosition = (this.currentHideRightPosition + 1) % 6 || 1;
@@ -132,7 +135,7 @@ class AnimeCharacters extends Component {
         this.prevImage += 1;
         this.nextImage += 1;
       });
-    } else console.log('No next images');
+    } else this._openSnackBar('No Next Images');
   }
 
   _returnCardDetails = () => [
@@ -153,6 +156,10 @@ class AnimeCharacters extends Component {
       valueObj: this.state.image5,
     },
   ]
+
+  _openSnackBar = (message = 'Something went wrong...') => {
+    if (this.snackBarRef.current) this.snackBarRef.current.openSnackBar(message);
+  }
 
   render() {
     return (
@@ -177,6 +184,7 @@ class AnimeCharacters extends Component {
             </Button>
           </div>
         </div>
+        <Snackbar ref = {this.snackBarRef} />
       </div>
     );
   }
