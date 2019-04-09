@@ -64,7 +64,7 @@ export default class Home extends Component {
       .then((res) => {
         this.props.history.push('/anime_characters', {
           charactersList: res.data.results,
-        })
+        });
       })
       .catch((err) => {
         this.setState({ isLoadingOverlayVisible: false });
