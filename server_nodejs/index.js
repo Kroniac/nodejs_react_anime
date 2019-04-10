@@ -39,9 +39,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.send({ hi: 'there' });
-})
 app.use('/anime', animeRoutes);
 app.use('/characters_list', characterListRoutes)
 app.use((error, req, res, next) => {
