@@ -1,4 +1,5 @@
 export const ApiUrls = {
-  baseUrl: 'http://localhost:5000/',
+  baseUrl: 'https://desolate-mesa-41947.herokuapp.com/',
   getAnimeList: 'anime/anime',
+  getCharactersList: 'characters_list/characters_list?{urlParameters}',
 };
