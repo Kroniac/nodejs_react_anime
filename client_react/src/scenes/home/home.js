@@ -60,7 +60,7 @@ export default class Home extends Component {
     };
     const urlParameters = Qs.stringify(params);
     const fetchUrl = ApiUrls.baseUrl
-      + ApiUrls.getCharactersList.replace('{urlParameters', urlParameters);
+      + ApiUrls.getCharactersList.replace('{urlParameters}', urlParameters);
     axios(fetchUrl)
       .then((res) => {
         this.props.history.push('/anime_characters', {
