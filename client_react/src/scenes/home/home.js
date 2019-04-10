@@ -59,7 +59,8 @@ export default class Home extends Component {
       list_name: collectionName,
     };
     const urlParameters = Qs.stringify(params);
-    const fetchUrl = `http://localhost:5000/characters_list/characters_list?${urlParameters}`;
+    const fetchUrl = ApiUrls.baseUrl
+      + ApiUrls.getCharactersList.replace('{urlParameters', urlParameters);
     axios(fetchUrl)
       .then((res) => {
         this.props.history.push('/anime_characters', {
